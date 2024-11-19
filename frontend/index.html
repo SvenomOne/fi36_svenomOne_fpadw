@@ -1,15 +1,64 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Produktübersicht</title> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Willkommen im Online-Shop</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Produktübersicht</h1>  
-   
-    <div id="product-container"></div>
-    
-    <script src="script.js"></script>  
+    <h1>Willkommen im Online-Shop</h1>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="#" onclick="showSection('products')">Produktübersicht</a>
+        <a href="#" onclick="showSection('register')">Registrierung</a>
+        <a href="#" onclick="showSection('login')">Anmeldung</a>
+    </div>
+
+    <!-- Sektionen für verschiedene Bereiche -->
+    <div id="products" style="display:none;">
+        <h2>Produktübersicht</h2>
+        <div id="product-container"></div>
+    </div>
+
+    <div id="register" style="display:none;">
+        <h2>Registrierung</h2>
+        <form id="registration-form">
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" required>
+            
+            <label for="password">Passwort:</label>
+            <input type="password" id="password" required>
+            
+            <label for="confirm-password">Passwort bestätigen:</label>
+            <input type="password" id="confirm-password" required>
+            
+            <button type="submit">Registrieren</button>
+        </form>
+        <div id="registration-message"></div> 
+    </div>
+
+    <div id="login" style="display:none;">
+        <h2>Anmeldung</h2>
+        <form id="login-form">
+            <label for="login-email">E-Mail:</label>
+            <input type="email" id="login-email" required>
+            <label for="login-password">Passwort:</label>
+            <input type="password" id="login-password" required>
+            <button type="submit">Anmelden</button>
+        </form>
+        <div id="login-message"></div>
+    </div>
+
+    <!-- Warenkorb nur nach Anmeldung anzeigen -->
+    <div id="cart" style="display:none;">
+        <h2>Warenkorb</h2>
+        <p>Hier erscheint der Warenkorb nach der Anmeldung.</p>
+    </div>
+
+    <script src="routes/script.js"></script>
+    <script src="routes/register.js"></script>
+    <script src="routes/login.js"></script>
 </body>
 </html>

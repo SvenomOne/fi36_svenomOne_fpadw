@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
         // Bild-URL zusammenstellen
         results.forEach(product => {
             if (product.image) {
-                product.image = `https://fi.mshome.net/fi36_schaklewski_fpadw/photos/${product.image}`;
+                product.image = `http://fi.mshome.net/fi36_schaklewski_fpadw/photos/${product.image}`;
             }
         });
                     

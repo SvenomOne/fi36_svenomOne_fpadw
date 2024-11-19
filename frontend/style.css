@@ -1,0 +1,21 @@
+/* Einfache Navbar-Stile */
+.navbar {
+    display: flex;
+    background-color: #333;
+    padding: 10px;
+}
+.navbar a {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    margin: 0 5px;
+}
+.navbar a:hover {
+    background-color: #555;
+}
+
+/* Weitere Stile für die Sektionen */
+#product-container img {
+    width: 150px;
+    height: 150px;
+}
