@@ -21,6 +21,9 @@
 }
 
 #cart {
+    max-height: 400px; /* maximale Höhe des Warenkorbs */
+    overflow-y: auto; /* vertikales Scrollen aktivieren */
+   
     position: fixed;                              /* Fixiert das Element an einer festen Position */
     top: 10%;                                     /* Abstand vom oberen Rand des Bildschirms */
     right: 2%;                                    /* Abstand vom rechten Rand des Bildschirms */

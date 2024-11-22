@@ -33,10 +33,8 @@ function displayCart() {
     .catch(error => console.error('Fehler beim Abrufen des Warenkorbs:', error));
 }
 
-
-
 // Produkt zum Warenkorb hinzufügen
-function addToCart(productId) {
+function addToCart(product) {
     const token = localStorage.getItem('token'); // Token aus dem Login
     fetch('http://fi.mshome.net:3000/cart', {
         method: 'POST',
@@ -44,7 +42,7 @@ function addToCart(productId) {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ productId, quantity: 1 }) // Menge standardmäßig 1
+        body: JSON.stringify({ productId: product.id, quantity: 1 }) // Menge standardmäßig 1
     })
     .then(response => {
         if (response.ok) {
@@ -68,29 +66,11 @@ function removeFromCart(productId) {
     })
     .then(response => {
         if (response.ok) {
-            console.log('Artikel erfolgreich entfernt');
+            console.log(`Produkt ${productId} erfolgreich entfernt`);
             displayCart(); // Warenkorb aktualisieren
         } else {
             console.error('Fehler beim Entfernen:', response.statusText);
         }
     })
-    .catch(error => console.error('Netzwerkfehler:', error));
-}
-
-// Warenkorb abschicken
-function submitCart(userId) {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    fetch('http://fi.mshome.net:3000/order', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ userId, cart })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Bestellung erfolgreich:', data);
-        localStorage.removeItem('cart'); // Warenkorb leeren
-    })
-    .catch(error => console.error('Fehler:', error));
+    .catch(error => console.error('Netzwerkfehler beim Entfernen:', error));
 }
