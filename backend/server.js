@@ -14,20 +14,33 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Debugging-Middleware (füge das hier ein)
+// Debugging-Middleware
 app.use((req, res, next) => {
     console.log(`Anfrage erhalten: ${req.method} ${req.url}`);
     next();
 });
+app.use((req, res, next) => {
+    res.removeHeader('Content-Security-Policy');
+    console.log('Headers vor dem Senden:', res.getHeaders());
+    next();
+});
 
-// Routen
+// Middleware importieren
+const authenticate = require('./middleware/authenticate');
+
+// Routen importieren
 const register = require('./routes/register');
 const login = require('./routes/login');
 const products = require('./routes/products');
+const orderRoutes = require('./routes/order');
+const cartRoutes = require('./routes/cart');
 
+// Routen verwenden
 app.use('/register', register);
 app.use('/login', login);
 app.use('/products', products);
+app.use('/order', authenticate, orderRoutes); // Authentifizierung hinzufügen
+app.use('/cart', authenticate, cartRoutes);   // Authentifizierung hinzufügen
 
 // Statische Inhalte
 app.use('/photos', express.static('photos'));

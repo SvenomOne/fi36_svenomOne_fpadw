@@ -14,6 +14,10 @@
         <a href="#" onclick="showSection('products')">Produktübersicht</a>
         <a href="#" onclick="showSection('register')">Registrierung</a>
         <a href="#" onclick="showSection('login')">Anmeldung</a>
+        <span id="user-info" style="display:none;">
+            <span id="username-display"></span>
+            <button onclick="logout()">Ausloggen</button>
+        </span>
     </div>
 
     <!-- Sektionen für verschiedene Bereiche -->
@@ -55,10 +59,13 @@
     <div id="cart" style="display:none;">
         <h2>Warenkorb</h2>
         <p>Hier erscheint der Warenkorb nach der Anmeldung.</p>
+        <div id="cart-items"></div>
     </div>
 
     <script src="routes/script.js"></script>
     <script src="routes/register.js"></script>
+    <script src="routes/cart.js"></script>
     <script src="routes/login.js"></script>
+    
 </body>
 </html>

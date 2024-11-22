@@ -19,3 +19,15 @@
     width: 150px;
     height: 150px;
 }
+
+#cart {
+    position: fixed;                              /* Fixiert das Element an einer festen Position */
+    top: 10%;                                     /* Abstand vom oberen Rand des Bildschirms */
+    right: 2%;                                    /* Abstand vom rechten Rand des Bildschirms */
+    width: 300px;                                 /* Breite des Warenkorbs */
+    background-color: #239b4f;                  /* Hintergrundfarbe */
+    border: 1px solid #6e49dc;                  /* Rahmen */
+    padding: 15px;                                /* Innenabstand */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Schatten für Eleganz */
+    z-index: 1000;                                /* Über allen anderen Elementen anzeigen */
+}

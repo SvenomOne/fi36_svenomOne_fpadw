@@ -13,22 +13,67 @@ document.getElementById('login-form').addEventListener('submit', function(event)
         },
         body: JSON.stringify({ email, password }),
     })
-       
-        .then(response => {console.log(response);return response})
-        .then(response => response.json())
-        .then(data => {
-            const messageElement = document.getElementById('login-message');
-            if (data.message) {
-                messageElement.innerText = data.message;
-                messageElement.style.color = data.success ? 'green' : 'red';
-            }
-    
-            // Falls die Anmeldung erfolgreich war, den Warenkorb anzeigen
-            if (data.success) {
-                document.getElementById('cart').style.display = 'block';
-                console.log('JWT-Token:', data.token); // JWT-Token anzeigen
-            }
-        })
-        .catch(error => console.error('Anmeldefehler:', error));
-    
+    .then(response => response.json())
+    .then(data => {
+        const messageElement = document.getElementById('login-message');
+        if (data.message) {
+            messageElement.innerText = data.message;
+            messageElement.style.color = data.success ? 'green' : 'red';
+        }
+
+        // Falls die Anmeldung erfolgreich war, den Benutzername anzeigen und Warenkorb anzeigen
+        if (data.success) {
+            console.log("Login erfolgreich:", data);
+            // Token und Benutzername speichern
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('username', email);
+
+            // Sektionen aktualisieren
+            showSection('products'); // Produkte anzeigen (falls gewünscht)
+            displayCart(); // Warenkorb-Inhalte anzeigen
+
+            // Benutzerinfo anzeigen
+            console.log("handleLoginSuccess() aufgerufen", email);
+            handleLoginSuccess(email);
+        }
+    })
+    .catch(error => console.error('Anmeldefehler:', error));
 });
+
+// Funktion zum Verarbeiten der erfolgreichen Anmeldung
+function handleLoginSuccess(username) {
+    console.log("handleLoginSuccess() aufgerufen", username);
+
+    // Benutzerinfo im Navbar-Bereich anzeigen
+    const userInfo = document.getElementById('user-info');
+    const usernameDisplay = document.getElementById('username-display');
+    usernameDisplay.textContent = `Angemeldet als: ${username}`;
+    userInfo.style.display = 'inline';
+
+    // Warenkorb anzeigen
+    const cartSection = document.getElementById('cart');
+    console.log("Warenkorb sichtbar machen:", cartSection);
+    cartSection.style.display = 'block';
+
+   /*  // Sektionen aktualisieren
+    showSection('products'); // Produkte anzeigen (falls gewünscht)
+    displayCart(); // Warenkorb-Inhalte anzeigen */
+}
+
+// Funktion zum Ausloggen
+function logout() {
+    // Token und Benutzername aus dem lokalen Speicher entfernen
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+
+    // Benutzerinfo ausblenden
+    const userInfo = document.getElementById('user-info');
+    userInfo.style.display = 'none';
+
+    // Warenkorb ausblenden
+    const cartSection = document.getElementById('cart');
+    cartSection.style.display = 'none';
+
+    // Zurück zur Anmeldeseite wechseln
+    showSection('login');
+}
