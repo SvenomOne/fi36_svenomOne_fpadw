@@ -12,30 +12,38 @@ router.get('/', (req, res) => {
 
 // POST /order - Bestellung verarbeiten
 router.post('/', async (req, res) => {
-    const { userId, cart } = req.body;
-
-    if (!userId || !cart || cart.length === 0) {
-        return res.status(400).send({ error: 'Ungültige Bestellung' });
-    }
-
+    const connection = await db;
+    const userId = req.user && req.user.userId; // Aktueller Nutzer
+    console.log("kommentar");
+    
     try {
-        // Bestellung in der Tabelle 'order' speichern
-        const [orderResult] = await db.execute(
-            'INSERT INTO `order` (user_id, created_at, status) VALUES (?, NOW(), ?)',
-            [userId, 'pending']
-        );
+        // Warenkorb des Nutzers abrufen
+        const [cart] = await connection.query('SELECT * FROM cart WHERE user_id = ?', [userId]);
+        
+        if (cart.length === 0) {
+            return res.status(400).send({ message: 'Warenkorb ist leer. Bestellung nicht möglich.' });
+        }
+        
+        console.log(cart);
 
+        // Bestellung in der Tabelle 'order' speichern
+        const [orderResult] = await connection.query(
+            'INSERT INTO `order` (user_id, order_date) VALUES (?, NOW())',
+            [userId]
+        );
         const orderId = orderResult.insertId;
 
         // Produkte in 'order_items' speichern
         const orderItemsQueries = cart.map(item =>
-            db.execute(
-                'INSERT INTO order_items (order_id, product_id, quantity, price) SELECT ?, ?, ?, price FROM product WHERE id = ?',
-                [orderId, item.productId, item.quantity, item.productId]
+            connection.query(
+                'INSERT INTO order_items (order_id, product_id, quantity) VALUES (?, ?, ?)',
+                [orderId, item.product_id, item.quantity]
             )
         );
-
         await Promise.all(orderItemsQueries);
+
+        // Warenkorb leeren
+        await connection.query('DELETE FROM cart WHERE user_id = ?', [userId]);
 
         res.status(201).send({ message: 'Bestellung erfolgreich angelegt', orderId });
     } catch (error) {
