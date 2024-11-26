@@ -62,19 +62,6 @@
         <div id="cart-items"></div>
     </div>
 
-    <!-- JavaScript für dynamische Login-Prüfung -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const token = localStorage.getItem('token');
-            if (token) {
-                // Benutzer ist eingeloggt
-                document.getElementById('user-info').style.display = 'block';
-                document.querySelector('a[onclick="showSection(\'login\')"]').style.display = 'none';
-                document.querySelector('a[onclick="showSection(\'register\')"]').style.display = 'none';
-            }
-        });
-    </script>
-
     <!-- JavaScript-Dateien -->
     <script src="routes/script.js"></script>
     <script src="routes/register.js"></script>
