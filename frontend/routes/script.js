@@ -9,17 +9,11 @@ function showSection(section) {
     // Angeforderte Sektion anzeigen
     document.getElementById(section).style.display = 'block';
 
-    // Wenn der Benutzer eingeloggt ist, bleibt der Warenkorb sichtbar
-    if (isLoggedIn() && section !== 'cart') {
-        document.getElementById('cart').style.display = 'block';
-    }
-
     // Nur für die Produktübersicht: Daten laden
     if (section === 'products') {
         loadProducts();
     }
 }
-
 
 // Funktion zum Laden der Produktdaten
 function loadProducts() {

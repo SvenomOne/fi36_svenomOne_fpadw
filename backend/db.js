@@ -9,14 +9,6 @@ const connection = async () => {
     })
 };
 
-// db.connect((err) => {
-//     if (err) {
-//         console.error('Datenbankverbindung fehlgeschlagen:', err);
-//     } else {
-//         console.log('Mit der Datenbank verbunden.');
-//     }
-// });
-
 const db = connection();
 
 module.exports = db;

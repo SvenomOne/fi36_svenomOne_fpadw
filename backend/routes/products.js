@@ -3,7 +3,6 @@ const db = require('../db');            // Datenbankverbindung importieren
 
 const router = express.Router();
 
-
 // Route zum Abrufen aller Produkte
 router.get('/',async  (req, res) => {
     const connection = await db;
