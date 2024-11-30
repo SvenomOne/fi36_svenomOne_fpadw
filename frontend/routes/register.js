@@ -2,10 +2,10 @@
 document.getElementById('registration-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Verhindert das Standardverhalten 
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const email           = document.getElementById('email').value;
+    const password        = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
-    const messageElement = document.getElementById('registration-message');
+    const messageElement  = document.getElementById('registration-message');
 
     // Überprüfen, ob die E-Mail-Adresse mit @nivea.de endet
     if (!email.endsWith('@nivea.de')) {
@@ -32,16 +32,16 @@ document.getElementById('registration-form').addEventListener('submit', function
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            messageElement.innerText = 'Registrierung erfolgreich!';
+            messageElement.innerText   = 'Registrierung erfolgreich!';
             messageElement.style.color = 'green';
         } else {
-            messageElement.innerText = data.message || 'Registrierung fehlgeschlagen.';
+            messageElement.innerText   = 'Registrierung fehlgeschlagen.';
             messageElement.style.color = 'red';
         }
     })
     .catch(error => {
         console.error('Registrierungsfehler:', error);
-        messageElement.innerText = 'Ein Fehler ist aufgetreten.';
+        messageElement.innerText   = 'Ein Fehler ist aufgetreten.';
         messageElement.style.color = 'red';
     });
 });

@@ -17,14 +17,14 @@
 
 /* Benutzerbereich neben Anmeldung */
 #user-info {
-    display: flex; /* Flexbox für bessere Ausrichtung */
+    display: flex;       /* Flexbox für bessere Ausrichtung */
     align-items: center; /* Vertikale Zentrierung */
-    margin-left: 10px; /* Abstand zu "Anmeldung" */
+    margin-left: 10px;   /* Abstand zu "Anmeldung" */
 }
 
 #username-display {
-    color: #ffffff; /* Helle Schriftfarbe */
-    font-weight: bold; /* Optional: Fetter Text für bessere Sichtbarkeit */
+    color: #ffffff;   /* Helle Schriftfarbe */
+    font-weight: bold;  /* Optional: Fetter Text für bessere Sichtbarkeit */
     margin-right: 10px; /* Optional: Abstand zum Logout-Button */
 }
 
@@ -36,7 +36,7 @@
 
 #cart {
     max-height: 400px; /* maximale Höhe des Warenkorbs */
-    overflow-y: auto; /* vertikales Scrollen aktivieren */
+    overflow-y: auto;  /* vertikales Scrollen aktivieren */
    
     position: fixed;                              /* Fixiert das Element an einer festen Position */
     top: 10%;                                     /* Abstand vom oberen Rand des Bildschirms */

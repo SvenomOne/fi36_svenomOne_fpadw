@@ -25,7 +25,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
         if (data.success) {
             console.log("Login erfolgreich:", data);
             // Token und Benutzername speichern
-            localStorage.setItem('token', data.token);
+            localStorage.setItem('token', data.token); 
             localStorage.setItem('username', email);
 
             // Sektionen aktualisieren
@@ -54,10 +54,6 @@ function handleLoginSuccess(username) {
     const cartSection = document.getElementById('cart');
     console.log("Warenkorb sichtbar machen:", cartSection);
     cartSection.style.display = 'block';
-
-   /*  // Sektionen aktualisieren
-    showSection('products'); // Produkte anzeigen (falls gewünscht)
-    displayCart(); // Warenkorb-Inhalte anzeigen */
 }
 
 // Funktion zum Ausloggen
