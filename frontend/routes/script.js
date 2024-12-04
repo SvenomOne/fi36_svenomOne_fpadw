@@ -101,8 +101,8 @@ function addToCart(product) {
     // Daten, die an den Server gesendet werden
     const dataToSend = {
         userId: localStorage.getItem('userId'), // Benutzer-ID
-        productId: product.id, // Produkt-ID
-        quantity: 1, // Menge
+        productId: product.id,                  // Produkt-ID
+        quantity: 1,                            // Menge
     };
 
     console.log("Daten, die an den Server gesendet werden:", dataToSend);
@@ -148,7 +148,7 @@ function updateCartUI() {
     cartSection.appendChild(totalElement);
 }
 
-// Sicherstellen, dass der Warenkorb beim Laden der Seite angezeigt wird
+// Sicherstellen, dass der Warenkorb nach dem  Laden der Seite angezeigt wird
 document.addEventListener('DOMContentLoaded', () => {
     updateCartUI();
 });
